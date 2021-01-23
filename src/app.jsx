@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-function App(){
-    const [data,setdata] = useState([]);
+import React, { useState } from "react";
+import Fetchpost from "./fetch";
+function App(props){
     const [name,setname] = useState("users");
-//this.state={data:"users"} same done above by using hook method
-    useEffect(()=>{
-        fetch(`https://jsonplaceholder.typicode.com/${name}`)
-        .then(response=>response.json())
-        .then(items=>{setdata(items);
-        });
-    },[name]);
+    let data=Fetchpost(`https://jsonplaceholder.typicode.com/${name}`,name);
+    if(!data){return null;}
     return(
         <React.Fragment>
             <div className="ui container">
